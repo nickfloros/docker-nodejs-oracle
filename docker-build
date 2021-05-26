@@ -1,0 +1,3 @@
+#!/bin/bash
+# help file to image
+docker build -t nodejs-alpine . -f Dockerfile.alpine
