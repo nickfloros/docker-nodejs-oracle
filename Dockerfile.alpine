@@ -1,0 +1,20 @@
+FROM node:14-alpine3.13
+
+ENV LD_LIBRARY_PATH=/lib
+
+RUN apk update && apk add gcc libnsl libaio curl unzip openssl-dev autoconf musl-dev libc6-compat 
+
+RUN wget https://download.oracle.com/otn_software/linux/instantclient/193000/instantclient-basic-linux.x64-19.3.0.0.0dbru.zip && \
+    unzip instantclient-basic-linux.x64-19.3.0.0.0dbru.zip && \
+    cp -r instantclient_19_3/* /lib && \
+    rm -rf instantclient-basic-linux.x64-19.3.0.0.0dbru.zip 
+
+ADD script.sh /root/script.sh
+RUN /root/script.sh
+
+WORKDIR /app
+
+COPY index.js .
+COPY package.json .
+RUN npm install --production
+CMD ["node","index.js"]
