@@ -1,0 +1,20 @@
+#!/bin/bash
+# clean up 
+# ./docker-clean [container|image|all] [alpine | debian]
+
+case $1 in
+  container )
+    docker container rm test-$2
+    ;;
+  image )
+    docker image rm nodejs-$2
+    ;;
+  all ) 
+    docker container rm test-$2
+    docker image rm nodejs-$2
+    ;;
+  * ) 
+    echo "help ..."
+    echo "./docker-clean [container|image|all] [alpine | debian]"
+    ;;    
+esac
