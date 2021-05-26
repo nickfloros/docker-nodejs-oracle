@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# helper script to run a container
+
+docker run --name test-alpine -e NODE_ORACLEDB_CONNECTION_STRING=192.168.1.232:32118/XE nodejs-alpine
